@@ -1,0 +1,79 @@
+<h1>Connection Info</h1>
+
+<table class="table">
+
+	<tr><td>Date</td><td>{{ formatDate(connection.date) }}</td></tr>
+	<tr><td>Duration</td><td>{{ connection.duration }} seconds</td></tr>
+	<tr><td>Network / Malware</td><td>
+		<a href="#/network/{{ connection.network.id }}">#{{ connection.network.id }}</a>
+		<span> / </span>
+		<a href="#/malware/{{ connection.network.malware.id }}">{{ connection.network.malware.name != null ? connection.network.malware.name : fakenames[connection.network.malware.id] }}</a>
+	</td></tr>
+	<!-- <tr><td>ID</td><td>{{ connection.id }}</td></tr> -->
+	<tr><td>Honeypot name</td><td>{{ connection.backend_user }}</td></tr>
+	<tr>
+		<td>IP</td>
+		<td>
+			<span ng-show="connection.asn"><a href="#/connections?country={{ connection.country }}"><span class="glyphicon glyphicon-screenshot"></span></a> <img src="img/flags/{{ connection.country.toLowerCase() }}.png"> {{ connection.city + ', ' + connection.countryname }} <a target="_blank" href="http://www.openstreetmap.org/?zoom=13&lat={{ connection.latitude }}&lon={{ connection.longitude }}">map</a> <br></span>
+			<span><a href="#/connections?ip={{ connection.ip }}"><span class="glyphicon glyphicon-screenshot"></span></a></span> {{ connection.ip }}<br>
+			<span ng-show="connection.asn"><a href="#/asn/{{ connection.asn.asn }}"><span class="glyphicon glyphicon-screenshot"></span></a> AS{{ connection.asn.asn }} <b>{{ connection.asn.name }}</b>
+			</span><br>
+			<span ng-show="connection.asn">{{ connection.ipblock }}</span>
+		</td>
+	</tr>
+	<tr><td>User : Password</td><td><a href="#/connections?user={{ connection.user }}"><span class="glyphicon glyphicon-screenshot"></span> "{{ connection.user }}"</a> : <a href="#/connections?password={{ connection.password }}">"{{ connection.password }}" <span class="glyphicon glyphicon-screenshot"></span></a></td></tr>
+	<tr ng-show="connection.conns_before.length > 0">
+		<td>Prior Connections</td>
+		<td>
+			<p ng-repeat="associate in connection.conns_before">
+				<a href="{{ '#/connection/' + associate.id }}">{{ formatDate(associate.date) }}</a> from 
+				<img src="img/flags/{{ associate.country.toLowerCase() }}.png"> {{ associate.ip }}
+			</p>
+		</td>
+	</tr>
+    <tr ng-show="connection.conns_after.length > 0">
+		<td>Subsequent Connections</td>
+		<td>
+			<p ng-repeat="associate in connection.conns_after">
+				<a href="{{ '#/connection/' + associate.id }}">{{ formatDate(associate.date) }}</a> from 
+				<img src="img/flags/{{ associate.country.toLowerCase() }}.png"> {{ associate.ip }}
+			</p>
+		</td>
+	</tr>
+    <tr ng-show="connection.tags.length > 0">
+		<td>Tags</td>
+		<td>
+            <a class="btn btn-default btn-xs" ng-repeat="tag in connection.tags" style="margin-right: 1em;" href="#/tag/{{ tag.name }}" data-toggle="tooltip" title="{{ tag.code }}">{{ tag.name }}</a>
+		</td>
+	</tr>
+    
+
+</table>
+
+<div ng-show="connection.urls.length > 0">
+	<h2>URLs gathered</h2>
+
+	<table class="table">
+
+		<tr>
+			<th>Url</th>
+			<th>First Seen</th>
+			<th>Sample</th>
+		</tr>
+		<tr ng-repeat="url in connection.urls">
+			<td><a href="{{ '#/url/' + encurl(url.url) }}">{{ url.url }}</a></td>
+			<td>{{ formatDate(url.date) }}</td>
+			<td><a href="{{ '#/sample/' + url.sample }}">{{ short(url.sample, 16) }}</a></td>
+		</tr>
+
+	</table>
+</div>
+
+<div ng-show="connection.text_combined != ''">
+	<h2>Session text <small> show output <input type="checkbox" ng-model="displayoutput"></small></h2>
+
+	<div class="well well-sm code">
+		<div style="font-size: 0.7em;">Session Text does not include non-ascii characters</div>
+		<span class="code-line" ng-show="displayoutput || event.in" ng-class="{ isinput: event.in }" ng-repeat="event in connection.stream" title="after {{ event.ts }} s">{{ event.data }}</span>
+	</div>
+</div>
