@@ -1,0 +1,21 @@
+<h2>Connections</h2>
+
+<div class="well well-sm" style="font-family: monospace">
+	<div style="font-size: 0.7em;">
+		Filters:
+		<button style="background:none; border:none; margin:0; padding:0;" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+			<span class="glyphicon glyphicon-info-sign"></span>
+		</button>
+		<div class="collapse" id="collapseExample">
+			<p>You may use the url bar to edit filters</p>
+			<p>Available arguments: ["ipblock", "user", "password", "ip", "country", "asn_id"]</p>
+		</div>
+	</div>
+	<span ng-repeat="(k, v) in filter">{{ k }} == <img ng-show="k == 'country'" src="img/flags/{{ v.toLowerCase() }}.png"> {{ v }} {{ k == 'country' ? '(' + COUNTRY_LIST[v] + ')' : '' }} {{ $last ? '' : ', ' }}</span>
+</div>
+
+<div ng-include="'connectionlist-embed.html'"></div>
+
+<div class="pull-right">
+	<button type="button" class="btn btn-default" ng-click="nextpage()">More &raquo;</button>
+</div>
