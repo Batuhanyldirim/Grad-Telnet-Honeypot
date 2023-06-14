@@ -1,0 +1,98 @@
+<html>
+<head>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+<script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+<script src="js/angular-vis.js"></script>
+
+<script src="common.js"></script>
+<script src="apiurl.js"></script>
+<script src="sample.js"></script>
+<script src="countries.js"></script>
+
+<style type="text/css">
+
+.code {
+	font-family: monospace;
+}
+
+.code-line {
+	white-space: pre;
+}
+
+.code-line:hover {
+	white-space: pre;
+	background-color: #ddd;
+}
+
+
+.code-line.isinput:hover {
+	background-color: #fcc  ;
+}
+
+.code-line.isinput {
+    color: #a00;
+	font-weight: bold;
+}
+
+</style>
+
+</head>
+<body ng-app="honey">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+  
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="#/" style="padding: 0"><img src="img/icon.svg" style="height: 2em; margin: 10px; display: float; float: left;"><span style="margin: 15px 15px 15px 0px; display: float; float: left;">Telnet-Iot-Honeypot</span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
+      <ul class="nav navbar-nav">
+        <li><a href="#/networks">Networks</a></li>
+        <li><a href="#/urls">Urls</a></li>
+        <li><a href="#/samples">Samples</a></li>
+        <li><a href="#/connections">Connections</a></li>
+        <li><a href="#/tags">Tags</a></li>
+        <li><a href="#/admin">Admin</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Github fork button, actually placed o top right -->
+<a href="https://github.com/Phype/telnet-iot-honeypot" target="_blank" class="hidden-xs">
+	<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+</a>
+
+<div class="container">
+	<div ng-view></div>
+</div>
+</body>
+</html>

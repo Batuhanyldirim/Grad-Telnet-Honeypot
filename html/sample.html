@@ -1,0 +1,45 @@
+<h1>Sample Info</h1>
+
+<table class="table">
+
+	<tr><td>First seen</td><td>{{ formatDate(sample.date) }}</td></tr>
+	<tr><td>First seen file name</td><td>{{ sample.name }}</td></tr>
+	<tr><td>File size</td><td>{{ sample.length }} Bytes</td></tr>
+	<tr><td>SHA256</td><td>{{ sample.sha256 }}</td></tr>
+	<tr>
+		<td>Virustotal result</a></td>
+		<td>
+			<a href="https://www.virustotal.com/latest-scan/{{ sample.sha256 }}" target="_blank" ng-show="sample.result != null">
+				<span class="glyphicon glyphicon-link"></span> {{ sample.result }}
+			</a>
+			<span ng-show="sample.result == null">Unknown, <a href="https://www.virustotal.com/latest-scan/{{ sample.sha256 }}" target="_blank">search yourself</a></span>
+		</td>
+	</tr>
+	<tr><td>Network / Malware</td><td>
+		<a href="#/network/{{ sample.network.id }}">#{{ sample.network.id }}</a>
+		<span> / </span>
+		<a href="#/malware/{{ sample.network.malware.id }}">{{ sample.network.malware.name != null ? sample.network.malware.name : fakenames[sample.network.malware.id] }}</a>
+	</td></tr>
+
+</table>
+
+<h2>Download Info</h2>
+
+<pre>{{ sample.info }}</pre>
+
+<h2>Downloaded from</h2>
+
+<table class="table">
+
+	<tr>
+		<th>Url</th>
+		<th>Date</th>
+		<th>N⁰ Connections</th>
+	</tr>
+	<tr ng-repeat="url in sample.urls">
+		<td><a href="{{ '#/url/' + encurl(url.url) }}">{{ url.url }}</a></td>
+		<td>{{ formatDate(url.date) }}</td>
+		<td>{{ url.connections.length }}</td>
+	</tr>
+
+</table>
